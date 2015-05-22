@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @galaxy.name %>
+</p>
+
+<p>
+  <strong>Turn frequency:</strong>
+  <%= @galaxy.turn_frequency %>
+</p>
+
+<p>
+  <strong>Turn number:</strong>
+  <%= @galaxy.turn_number %>
+</p>
+
+<p>
+  <strong>Last turn at:</strong>
+  <%= @galaxy.last_turn_at %>
+</p>
+
+<% if @galaxy.quadrants.any? %>
+    <p>
+      <strong>Quadrants</strong>
+      <ol>
+        <%= render @quadrants %>
+      </ol>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_galaxy_path(@galaxy) %> |
+<%= link_to 'Back', galaxies_path %>

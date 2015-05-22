@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sector_id: 1
+  subsector_X: 1
+  subsector_Y: 1
+
+two:
+  sector_id: 1
+  subsector_X: 1
+  subsector_Y: 1

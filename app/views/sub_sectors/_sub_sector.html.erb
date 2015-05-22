@@ -1,0 +1,6 @@
+<li id="sub_sector-<%= sub_sector.id %>">
+  <%= link_to 'SubSector ' + sub_sector.subsector_x.to_s + ', ' + sub_sector.subsector_y.to_s, sub_sector_path(sub_sector) %>
+  <% if sub_sector.system %>
+    (<%= link_to sub_sector.system.name, system_path(sub_sector.system) %>)
+  <% end %>
+</li>

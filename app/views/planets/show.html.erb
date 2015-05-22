@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<% if @planet.system %>
+    <p>
+      <strong>System:</strong>
+      <%= link_to @planet.system.name, system_path(@planet.system) %>
+    </p>
+<% elsif @planet.parent_planet %>
+    <p>
+      <strong>Parent Planet:</strong>
+      <%= link_to @planet.parent_planet.name, planet_path(@planet.parent_planet) %>
+    </p>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @planet.name %>
+</p>
+
+<p>
+  <strong>Average orbit:</strong>
+  <%= @planet.average_orbit %>
+</p>
+
+<p>
+  <strong>Eccentricity:</strong>
+  <%= @planet.eccentricity %>
+</p>
+
+<p>
+  <strong>Mass:</strong>
+  <%= @planet.mass %>
+</p>
+
+<p>
+  <strong>Radius:</strong>
+  <%= @planet.radius %>
+</p>
+
+<p>
+  <strong>Density:</strong>
+  <%= @planet.density %>
+</p>
+
+<p>
+  <strong>Planet type:</strong>
+  <%= @planet.planet_type.name %>
+</p>
+
+<% if @planet.moons %>
+    <p>
+      <strong><%= pluralize(@planet.moons.count, 'Moon') %>:</strong>
+    <ol>
+      <%= render @moons %>
+    </ol>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_planet_path(@planet) %>
+<% if @planet.system %>|
+    <%= link_to 'Back', system_path(@planet.system) %>
+<% elsif @planet.parent_planet %>|
+    <%= link_to 'Back', planet_path(@planet.parent_planet) %>
+<% end %>
+

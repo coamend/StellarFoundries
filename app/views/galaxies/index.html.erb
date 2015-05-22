@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Galaxies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Turn number</th>
+      <th>Name</th>
+      <th>Last turn at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @galaxies.each do |galaxy| %>
+      <tr>
+        <td><%= galaxy.turn_number %></td>
+        <td><%= galaxy.name %></td>
+        <td><%= galaxy.last_turn_at %></td>
+        <td><%= link_to 'Show', galaxy %></td>
+        <td><%= link_to 'Edit', edit_galaxy_path(galaxy) %></td>
+        <td><%= link_to 'Destroy', galaxy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Galaxy', new_galaxy_path %>

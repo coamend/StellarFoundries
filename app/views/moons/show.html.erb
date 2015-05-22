@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @moon.name %>
+</p>
+
+<p>
+  <strong>Planet:</strong>
+  <%= link_to @moon.planet.name, planet_path(@moon.planet) %>
+</p>
+
+<p>
+  <strong>Average orbit:</strong>
+  <%= @moon.average_orbit %>
+</p>
+
+<p>
+  <strong>Eccentricity:</strong>
+  <%= @moon.eccentricity %>
+</p>
+
+<p>
+  <strong>Mass:</strong>
+  <%= @moon.mass %>
+</p>
+
+<p>
+  <strong>Radius:</strong>
+  <%= @moon.radius %>
+</p>
+
+<p>
+  <strong>Density:</strong>
+  <%= @moon.density %>
+</p>
+
+<p>
+  <strong>Planet type:</strong>
+  <%= @moon.planet_type.name%>
+</p>
+
+<%= link_to 'Edit', edit_moon_path(@moon) %> |
+<%= link_to 'Back', planet_path(@moon.planet) %>

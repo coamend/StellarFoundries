@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  system_id: 1
+  luminosity: MyString
+  mass: 1.5
+  diameter: 1.5
+  surface_temperature: 1.5
+
+two:
+  name: MyString
+  system_id: 1
+  luminosity: MyString
+  mass: 1.5
+  diameter: 1.5
+  surface_temperature: 1.5

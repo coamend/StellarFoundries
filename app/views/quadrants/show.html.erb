@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Galaxy:</strong>
+  <%= link_to @quadrant.galaxy_id, galaxy_path(@quadrant.galaxy) %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @quadrant.name %>
+</p>
+
+<p>
+  <strong>Quadrant x:</strong>
+  <%= @quadrant.quadrant_x %>
+</p>
+
+<p>
+  <strong>Quadrant y:</strong>
+  <%= @quadrant.quadrant_y %>
+</p>
+
+<% if @quadrant.sectors.any? %>
+    <p>
+      <strong><%= pluralize(@sectors.count, 'Sectors') %>:</strong>
+    <ol>
+      <%= render @sectors %>
+    </ol>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_quadrant_path(@quadrant) %> |
+<%= link_to 'Back', galaxy_path(@quadrant.galaxy) %>

@@ -1,0 +1,57 @@
+<%= form_for(@galaxy_generator) do |f| %>
+  <% if @galaxy_generator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@galaxy_generator.errors.count, "error") %> prohibited this galaxy from being saved:</h2>
+
+      <ul>
+      <% @galaxy_generator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :turn_number %><br>
+    <%= f.number_field :turn_number %>
+  </div>
+  <div class="field">
+    <%= f.label :turn_frequency %><br>
+    <%= f.number_field :turn_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_turn_at %><br>
+    <%= f.datetime_select :last_turn_at %>
+  </div>
+  <div class="field">
+    <%= f.label :quadrant_x %><br>
+    <%= f.number_field :quadrant_x %>
+  </div>
+  <div class="field">
+    <%= f.label :quadrant_y %><br>
+    <%= f.number_field :quadrant_y %>
+  </div>
+  <div class="field">
+    <%= f.label :sector_x %><br>
+    <%= f.number_field :sector_x %>
+  </div>
+  <div class="field">
+    <%= f.label :sector_y %><br>
+    <%= f.number_field :sector_y %>
+  </div>
+  <div class="field">
+    <%= f.label :sub_sector_x %><br>
+    <%= f.number_field :sub_sector_x %>
+  </div>
+  <div class="field">
+    <%= f.label :sub_sector_y %><br>
+    <%= f.number_field :sub_sector_y %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

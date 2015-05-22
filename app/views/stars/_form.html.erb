@@ -1,0 +1,41 @@
+<%= form_for(@star) do |f| %>
+  <% if @star.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@star.errors.count, "error") %> prohibited this star from being saved:</h2>
+
+      <ul>
+      <% @star.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :system_id %><br>
+    <%= f.number_field :system_id %>
+  </div>
+  <div class="field">
+    <%= f.label :luminosity %><br>
+    <%= f.text_field :luminosity %>
+  </div>
+  <div class="field">
+    <%= f.label :mass %><br>
+    <%= f.text_field :mass %>
+  </div>
+  <div class="field">
+    <%= f.label :diameter %><br>
+    <%= f.text_field :diameter %>
+  </div>
+  <div class="field">
+    <%= f.label :surface_temperature %><br>
+    <%= f.text_field :surface_temperature %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

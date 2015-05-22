@@ -1,0 +1,111 @@
+<p id="notice"><%= notice %></p>
+
+<% if @system.sub_sector %>
+    <p>
+      <strong>Sub sector:</strong>
+      <%= link_to 'SubSector ' + @system.sub_sector.subsector_x.to_s + ', ' + @system.sub_sector.subsector_y.to_s, sub_sector_path(@system.sub_sector) %>
+    </p>
+<% elsif @system.parent_system %>
+    <p>
+      <strong>Parent System:</strong>
+      <%= link_to @system.parent_system.name, system_path(@system.parent_system) %>
+    </p>
+<% end %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @system.name %>
+</p>
+
+<% if @system.primary_star %>
+    <p>
+      <strong>Stars</strong>
+    <ol>
+      <%= render @primary_star %>
+    <% if @system.secondary_star %>
+        <%= render @secondary_star %>
+    <% end %>
+    </ol>
+    </p>
+    <% if @system.secondary_star %>
+        <p>
+          <strong>Binary system average distance:</strong>
+          <%= @system.binary_average_distance %>
+        </p>
+
+        <p>
+          <strong>Barycenter:</strong>
+          <%= @system.barycenter %>
+        </p>
+
+        <p>
+          <strong>Primary Eccentricity:</strong>
+          <%= @system.primary_eccentricity %>
+        </p>
+
+        <p>
+          <strong>Secondary Eccentricity:</strong>
+          <%= @system.secondary_eccentricity %>
+        </p>
+    <% end %>
+    <p>
+      <strong>Inner Orbit Limit:</strong>
+      <%= @system.inner_orbit_limit %>
+    </p>
+
+    <p>
+      <strong>Outer Orbit Limit:</strong>
+      <%= @system.outer_orbit_limit %>
+    </p>
+
+    <p>
+      <strong>Frost Line:</strong>
+      <%= @system.frost_line %>
+    </p>
+
+    <p>
+      <strong>Habitable Zone Inner Limit:</strong>
+      <%= @system.habitable_zone_inner %>
+    </p>
+
+    <p>
+      <strong>Habitable Zone Outer Limit:</strong>
+      <%= @system.habitable_zone_outer %>
+    </p>
+
+    <p>
+      <strong>Forbidden Zone Inner Limit:</strong>
+      <%= @system.forbidden_zone_inner %>
+    </p>
+
+    <p>
+      <strong>Forbidden Zone Outer Limit:</strong>
+      <%= @system.forbidden_zone_outer %>
+    </p>
+<% end %>
+<% if @system.primary_subsystem %>
+    <p>
+      <strong>Subsystems</strong>
+    <ol>
+      <%= render @primary_subsystem %>
+      <% if @system.secondary_subsystem %>
+        <%= render @secondary_subsystem %>
+      <% end %>
+    </ol>
+    </p>
+<% end %>
+<% if @system.planets %>
+    <p>
+      <strong><%= pluralize(@system.planets.count, 'Planet') %>:</strong>
+    <ol>
+      <%= render @planets %>
+    </ol>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_system_path(@system) %>
+<% if @system.sub_sector %>|
+    <%= link_to 'Back', sub_sector_path(@system.sub_sector) %>
+<% elsif @system.parent_system %>|
+    <%= link_to 'Back', system_path(@system.parent_system) %>
+<% end %>

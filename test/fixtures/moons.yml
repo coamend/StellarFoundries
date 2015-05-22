@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  planet_id: 1
+  average_orbit: 1.5
+  eccentricity: 1.5
+  mass: 1.5
+  radius: 1.5
+  density: 1.5
+  planet_type_id: 1
+
+two:
+  name: MyString
+  planet_id: 1
+  average_orbit: 1.5
+  eccentricity: 1.5
+  mass: 1.5
+  radius: 1.5
+  density: 1.5
+  planet_type_id: 1

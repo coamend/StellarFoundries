@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= link_to @sub_sector.sector_id, sector_path(@sub_sector.sector) %>
+</p>
+
+<p>
+  <strong>Subsector x:</strong>
+  <%= @sub_sector.subsector_x %>
+</p>
+
+<p>
+  <strong>Subsector y:</strong>
+  <%= @sub_sector.subsector_y %>
+</p>
+
+<% if @sub_sector.system %>
+    <p>
+      <strong>Systems</strong>
+    <ol>
+      <%= render @systems %>
+    </ol>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_sub_sector_path(@sub_sector) %> |
+<%= link_to 'Back', sector_path(@sub_sector.sector) %>

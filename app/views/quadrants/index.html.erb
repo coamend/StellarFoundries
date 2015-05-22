@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Quadrants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Universe</th>
+      <th>Name</th>
+      <th>Quadrant x</th>
+      <th>Quadrant y</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quadrants.each do |quadrant| %>
+      <tr>
+        <td><%= quadrant.universe_id %></td>
+        <td><%= quadrant.name %></td>
+        <td><%= quadrant.quadrant_x %></td>
+        <td><%= quadrant.quadrant_y %></td>
+        <td><%= link_to 'Show', quadrant %></td>
+        <td><%= link_to 'Edit', edit_quadrant_path(quadrant) %></td>
+        <td><%= link_to 'Destroy', quadrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quadrant', new_quadrant_path %>

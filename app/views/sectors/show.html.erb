@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quadrant:</strong>
+  <%= link_to @sector.quadrant_id, quadrant_path(@sector.quadrant) %>
+</p>
+
+<p>
+  <strong>Sectorx:</strong>
+  <%= @sector.sector_x %>
+</p>
+
+<p>
+  <strong>Sectory:</strong>
+  <%= @sector.sector_y %>
+</p>
+
+<% if @sector.sub_sectors.any? %>
+    <p>
+      <strong><%= pluralize(@sub_sectors.count, 'SubSector') %>:</strong>
+    <ol>
+      <%= render @sub_sectors %>
+    </ol>
+    </p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_sector_path(@sector) %> |
+<%= link_to 'Back', quadrant_path(@sector.quadrant) %>
