@@ -8,7 +8,7 @@ class GalaxyGeneratorsController < ApplicationController
   end
 
   def create
-=begin
+
     @galaxy = GenerateGalaxy(galaxy_params[:turn_number],
                                        galaxy_params[:turn_frequency],
                                        galaxy_params[:name],
@@ -19,7 +19,8 @@ class GalaxyGeneratorsController < ApplicationController
                                        galaxy_params[:sector_y],
                                        galaxy_params[:sub_sector_x],
                                        galaxy_params[:sub_sector_y])
-=end
+
+=begin
     @galaxy = GenerateGalaxyAsync(galaxy_params[:turn_number],
                              galaxy_params[:turn_frequency],
                              galaxy_params[:name],
@@ -30,7 +31,7 @@ class GalaxyGeneratorsController < ApplicationController
                              galaxy_params[:sector_y],
                              galaxy_params[:sub_sector_x],
                              galaxy_params[:sub_sector_y])
-
+=end
     if @galaxy.errors.size == 0
       redirect_to galaxy_path(@galaxy), notice: 'Galaxy was successfully generated.'
     else

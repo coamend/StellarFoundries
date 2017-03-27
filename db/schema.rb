@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508194643) do
+ActiveRecord::Schema.define(version: 20170323153454) do
 
   create_table "galaxies", force: :cascade do |t|
     t.integer  "turn_number",    limit: 4
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 20150508194643) do
     t.float    "surface_area",   limit: 24
   end
 
+  create_table "ore_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "ores", force: :cascade do |t|
+    t.integer  "depth",       limit: 4
+    t.integer  "size",        limit: 4
+    t.float    "strip_ratio", limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "planet_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -55,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150508194643) do
     t.datetime "updated_at",                   null: false
     t.float    "surface_area",     limit: 24
     t.integer  "parent_planet_id", limit: 4
+    t.integer  "axial_tilt",       limit: 4
   end
 
   add_index "planets", ["parent_planet_id"], name: "index_planets_on_parent_planet_id", using: :btree
@@ -66,6 +81,15 @@ ActiveRecord::Schema.define(version: 20150508194643) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "galaxy_id",  limit: 4
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.integer  "average_temperature",  limit: 4
+    t.integer  "temperature_variance", limit: 4
+    t.integer  "maximum_latitude",     limit: 4
+    t.integer  "minimum_latitude",     limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "sectors", force: :cascade do |t|

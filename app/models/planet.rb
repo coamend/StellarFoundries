@@ -5,7 +5,10 @@ class Planet < ActiveRecord::Base
            foreign_key: "parent_planet_id",
            primary_key: "id",
            dependent: :destroy
-  has_many :regions
+  has_many :regions,
+           dependent: :destroy
+  has_many :ores,
+           dependent: :destroy
   belongs_to :parent_planet, class_name: "Planet",
              foreign_key: "parent_planet_id",
              primary_key: "id"
@@ -24,7 +27,7 @@ class Planet < ActiveRecord::Base
     end
 
     while current_orbit >= system.inner_orbit_limit do
-      if (previous_orbit - current_orbit) > 0.15 # make sure orbits aren't too close
+      if (previous_orbit == 0 || previous_orbit - current_orbit) > 0.15 # make sure orbits aren't too close
         calculate_planet_info(system, current_orbit, solar_mass)
       end
 
@@ -41,7 +44,7 @@ class Planet < ActiveRecord::Base
     previous_orbit = starting_orbit
 
     while current_orbit <= system.outer_orbit_limit do
-      if (current_orbit - previous_orbit) > 0.15 # make sure orbits aren't too close
+      if (previous_orbit == 0 || current_orbit - previous_orbit) > 0.15 # make sure orbits aren't too close
         calculate_planet_info(system, current_orbit, solar_mass)
       end
 
@@ -204,6 +207,14 @@ class Planet < ActiveRecord::Base
             surface_area = 4 * Math::PI * (radius ** 2)
           end
 
+          if Random.rand(1..100) <= 75
+            #Prograde orbit
+            obliquity = Random.rand(0..90)
+          else
+            #Retrograde orbit
+            obliquity = Random.rand(91..180)
+          end
+
           planet = Planet.new(name: system.name + ' ' + orbit.round(2).to_s,
                               system_id: system.id,
                               average_orbit: orbit,
@@ -212,9 +223,13 @@ class Planet < ActiveRecord::Base
                               radius: radius,
                               density: density,
                               planet_type_id: planet_type,
-                              surface_area: surface_area)
+                              surface_area: surface_area,
+                              axial_tilt: obliquity)
 
           planet.save
+
+          # Generate ores
+          Ore.generate_ore(planet, system)
         end
 
         if radius > 0

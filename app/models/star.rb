@@ -55,7 +55,15 @@ class Star < ActiveRecord::Base
     puts 'Solar Class Roll: ' + rand_solar_class.to_s + ' Solar class: ' + solar_class + 'Solar mass: ' + solar_mass.to_s if Rails.env.development?
 
     # TODO Magic Number!!!
-    luminosity = solar_mass ** 3
+    if(solar_mass < 0.43) # Brown dwarf
+      luminosity = 0.23 * (solar_mass ** 2.3)
+    elsif(solar_mass < 2) # 0.43 < solar_mass < 2
+      luminosity = solar_mass ** 4
+    elsif(solar_mass < 20) # 2 < solar_mass < 20
+      luminosity = 1.5 * (solar_mass ** 3.5)
+    else # Solar mass is >= 20
+      luminosity = solar_mass * 3200
+    end
 
     # TODO Magic Number!!!
     diameter = solar_mass ** 0.74
