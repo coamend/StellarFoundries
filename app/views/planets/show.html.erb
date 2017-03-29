@@ -56,6 +56,20 @@
     </p>
 <% end %>
 
+<% if @planet.ores %>
+    <p>
+      <strong>Ores:</strong>
+    </p>
+
+    <ol>
+        <% @planet.ores.each do |o| %>
+            <li id="<%= o.id %>">
+              <%= o.ore_type.name %>: <%= o.size %> tons, <%= o.depth %> M deep, 1:<%= o.strip_ratio %> strip
+            </li>
+        <% end %>
+    </ol>
+<% end %>
+
 <%= link_to 'Edit', edit_planet_path(@planet) %>
 <% if @planet.system %>|
     <%= link_to 'Back', system_path(@planet.system) %>

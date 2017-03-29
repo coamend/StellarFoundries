@@ -229,6 +229,7 @@ class Planet < ActiveRecord::Base
           planet.save
 
           # Generate ores
+          puts 'Generating Ores!'
           Ore.generate_ore(planet, system)
         end
 
