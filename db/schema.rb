@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323153454) do
+ActiveRecord::Schema.define(version: 20170328214434) do
 
   create_table "galaxies", force: :cascade do |t|
     t.integer  "turn_number",    limit: 4
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170323153454) do
     t.float    "strip_ratio", limit: 24
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "planet_id",   limit: 4
   end
 
   create_table "planet_types", force: :cascade do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170323153454) do
     t.integer  "minimum_latitude",     limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "planet_id",            limit: 4
   end
 
   create_table "sectors", force: :cascade do |t|
