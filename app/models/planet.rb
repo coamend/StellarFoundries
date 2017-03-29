@@ -229,7 +229,7 @@ class Planet < ActiveRecord::Base
           planet.save
 
           # Generate ores
-          puts 'Generating Ores!'
+          puts "Generating Ores!" if Rails.env.development?
           Ore.generate_ore(planet, system)
         end
 
