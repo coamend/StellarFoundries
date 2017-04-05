@@ -3,7 +3,7 @@ class Moon < ActiveRecord::Base
   belongs_to :planet_type
   default_scope -> { order(average_orbit: :asc) }
 
-  def calculate_moon_info(system, planet, orbit)
+  def self.calculate_moon_info(system, planet, orbit)
     moon = Planet.new(name: planet.name + '' + orbit.to_s,
                       parent_planet_id: planet.id,
                       average_orbit: orbit)

@@ -1,7 +1,7 @@
 class Star < ActiveRecord::Base
   belongs_to :system
 
-  def generate_star(system, star_letter)
+  def self.generate_star(system, star_letter)
     rand_solar_class = Random.rand() * 100
     # solar_class = 'M'
     # solar_mass = 0
@@ -86,5 +86,9 @@ class Star < ActiveRecord::Base
       puts "Failed to generate star!" if Rails.env.development?
       false
     end
+  end
+
+  def self.get_star_energy(distance)
+    surface_temperature * Math.sqrt((diameter / 2) / (2 * distance))
   end
 end

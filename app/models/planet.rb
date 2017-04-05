@@ -15,7 +15,7 @@ class Planet < ActiveRecord::Base
 
   default_scope -> { order(average_orbit: :asc) }
 
-  def generate_planets(system, solar_mass)
+  def self.generate_planets(system, solar_mass)
     # starting_orbit = 0
     # current_orbit = 0
     previous_orbit = 0
@@ -27,7 +27,7 @@ class Planet < ActiveRecord::Base
     end
 
     while current_orbit >= system.inner_orbit_limit do
-      if (previous_orbit == 0 || previous_orbit - current_orbit) > 0.15 # make sure orbits aren't too close
+      if (previous_orbit == 0 || (previous_orbit - current_orbit) > 0.15) # make sure orbits aren't too close
         calculate_planet_info(system, current_orbit, solar_mass)
       end
 
@@ -44,7 +44,7 @@ class Planet < ActiveRecord::Base
     previous_orbit = starting_orbit
 
     while current_orbit <= system.outer_orbit_limit do
-      if (previous_orbit == 0 || current_orbit - previous_orbit) > 0.15 # make sure orbits aren't too close
+      if (previous_orbit == 0 || (current_orbit - previous_orbit) > 0.15) # make sure orbits aren't too close
         calculate_planet_info(system, current_orbit, solar_mass)
       end
 
@@ -56,7 +56,7 @@ class Planet < ActiveRecord::Base
     end
   end
 
-  def calculate_planet_info(system, orbit, solar_mass)
+  def self.calculate_planet_info(system, orbit, solar_mass)
     mass = 0
     radius = 0
     density = 0
@@ -230,7 +230,7 @@ class Planet < ActiveRecord::Base
 
           # Generate ores
           puts "Generating Ores!" if Rails.env.development?
-          Ore.generate_ore(planet, system)
+          Ore.generate_ore(planet)
         end
 
         if radius > 0
@@ -282,14 +282,14 @@ class Planet < ActiveRecord::Base
 
   end
 
-  def calculate_hill_sphere(primary, secondary, orbit, eccentricity)
+  def self.calculate_hill_sphere(primary, secondary, orbit, eccentricity)
     min_orbit = orbit * (1.0 - eccentricity)
     sphere = (primary / (3 * secondary))**(1.0/3.0)
 
     min_orbit * sphere
   end
 
-  def calculate_roche_limit(primary_radius, primary_density, secondary_density)
+  def self.calculate_roche_limit(primary_radius, primary_density, secondary_density)
     1.26 * primary_radius * ((primary_density / secondary_density)**(1.0/3.0))
   end
 end

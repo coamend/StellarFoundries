@@ -2,7 +2,7 @@ class Ore < ActiveRecord::Base
   belongs_to :planet
   belongs_to :ore_type
 
-  def generate_ore(planet, system)
+  def self.generate_ore(planet)
     case planet.planet_type.name
       when 'Gas Giant'
         minerals = {
@@ -164,23 +164,39 @@ class Ore < ActiveRecord::Base
 =end
   end
 
-  def add_ore_ratios(planet, quantities)
-    earth_size = 5.972 * (10 ** 19) # Mass of the crust of the earth, in tons
-    size_ratio = (planet.radius / 3)
+  def self.add_ore_ratios(planet, quantities)
+    earth_size = 10000000 #5.972 * (10 ** 19) # Mass of the crust of the earth, in tons
+    size_ratio = (planet.radius / 3).to_f
 
     total = quantities.values.sum()
 
     OreType.all().each do |type|
       if quantities.has_key?(type.name)
-        quantity_ratio = quantities[type.name] / total
+        quantity_ratio = quantities[type.name].to_f / total.to_f
         mineral_ratio = quantity_ratio * size_ratio
+        ore_size = (mineral_ratio / 4 * Random.rand(1.0..16.0) * earth_size).to_int
+        strip_ratio = 0.0
+
+        begin
+          roll = Random.rand(0.01..1.0)
+          strip_ratio += roll
+          if strip_ratio > 1000
+            break
+          end
+        end while roll > 0.1
+
+        ore_size = 2147483647 if ore_size > 2147483647 # INT limit for MySQL
+
+        puts 'Ore ratio for ' + type.name + ': ' + quantities[type.name].to_s + ' / ' + total.to_s if Rails.env.development?
+        puts 'Ore factor for ' + type.name + ': ' + quantity_ratio.to_s + ' * ' + mineral_ratio.to_s if Rails.env.development?
+        puts 'Ore size for ' + type.name + ': ' + ore_size.to_s if Rails.env.development?
 
         ore = Ore.new(
             planet_id: planet.id,
             ore_type: type,
-            depth: (Random.rand(-1000.0..1000.0) * planet.radius).to_int,
-            size: (mineral_ratio / 4 * Random.rand(1.0..16.0) * earth_size).to_int,
-            strip_ratio: Random.rand(1.0..80.0) / quantity_ratio
+            depth: (Random.rand(0.0..500.0) * planet.radius).to_int,
+            size: ore_size,
+            strip_ratio: strip_ratio
         )
         ore.save
       end

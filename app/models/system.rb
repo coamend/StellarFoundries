@@ -24,7 +24,7 @@ class System < ActiveRecord::Base
 
   has_many :planets, dependent: :destroy
 
-  def generate_system(sub_sector)
+  def self.generate_system(sub_sector)
     system = sub_sector.build_system(name: "System " + sub_sector.id.to_s)
 
     if system.save
@@ -155,7 +155,7 @@ class System < ActiveRecord::Base
     system
   end
 
-  def generate_subsystems(system_type,
+  def self.generate_subsystems(system_type,
                          parent_system,
                          sub_sector,
                          primary_star,
@@ -224,7 +224,7 @@ class System < ActiveRecord::Base
     end
   end
 
-  def calculate_system_info(system, primary_star, secondary_star = nil, iteration = 0)
+  def self.calculate_system_info(system, primary_star, secondary_star = nil, iteration = 0)
     # mass = 0
     # luminosity = 0
     # luminosity_sqrt = 0
@@ -313,5 +313,15 @@ class System < ActiveRecord::Base
     system.save
 
     Planet.generate_planets(system, mass)
+  end
+
+  def self.get_total_star_energy(distance)
+    energy = self.primary_star.get_star_energy(distance)
+
+    unless self.secondary_star.nil?
+      energy += self.secondary_star.get_star_energy(distance)
+    end
+
+    energy
   end
 end

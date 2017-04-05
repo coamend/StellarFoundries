@@ -2,7 +2,7 @@ class Quadrant < ActiveRecord::Base
   belongs_to :galaxy
   has_many :sectors, dependent: :destroy
 
-  def generate_quadrants(galaxy,
+  def self.generate_quadrants(galaxy,
                         quadrant_x,
                         quadrant_y,
                         sector_x,

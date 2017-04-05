@@ -2,7 +2,7 @@ class SubSector < ActiveRecord::Base
   belongs_to :sector
   has_one :system, dependent: :destroy
 
-  def generate_subsectors(sector,
+  def self.generate_subsectors(sector,
                          sub_sector_x,
                          sub_sector_y)
 

@@ -25,7 +25,17 @@ class GalaxiesController < ApplicationController
   # POST /galaxies
   # POST /galaxies.json
   def create
-    @galaxy = Galaxy.new(galaxy_params)
+    @galaxy = Galaxy.generate_galaxy(galaxy_params[:turn_number],
+                                     galaxy_params[:turn_frequency],
+                                     galaxy_params[:name],
+                                     galaxy_params[:last_turn_at],
+                                     galaxy_params[:quadrant_x],
+                                     galaxy_params[:quadrant_y],
+                                     galaxy_params[:sector_x],
+                                     galaxy_params[:sector_y],
+                                     galaxy_params[:sub_sector_x],
+                                     galaxy_params[:sub_sector_y])
+        #Galaxy.new(galaxy_params)
 
     respond_to do |format|
       if @galaxy.save
@@ -70,6 +80,15 @@ class GalaxiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def galaxy_params
-      params.require(:galaxy).permit(:turn_number, :turn_frequency, :name, :last_turn_at)
+      params.require(:galaxy).permit(:turn_number,
+                                     :turn_frequency,
+                                     :name,
+                                     :last_turn_at,
+                                     :quadrant_x,
+                                     :quadrant_y,
+                                     :sector_x,
+                                     :sector_y,
+                                     :sub_sector_x,
+                                     :sub_sector_y)
     end
 end

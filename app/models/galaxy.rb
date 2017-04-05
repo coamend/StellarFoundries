@@ -1,7 +1,8 @@
 class Galaxy < ActiveRecord::Base
   has_many :quadrants, dependent: :destroy
+  attr_accessor :quadrant_x, :quadrant_y, :sector_x, :sector_y, :sub_sector_x, :sub_sector_y
 
-  def generate_galaxy(turn_number,
+  def self.generate_galaxy(turn_number,
                      turn_frequency,
                      name,
                      last_turn_at,

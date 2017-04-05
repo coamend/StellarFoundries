@@ -2,7 +2,7 @@ class Sector < ActiveRecord::Base
   belongs_to :quadrant
   has_many :sub_sectors, dependent: :destroy
 
-  def generate_sectors(quadrant,
+  def self.generate_sectors(quadrant,
                       sector_x,
                       sector_y,
                       sub_sector_x,
