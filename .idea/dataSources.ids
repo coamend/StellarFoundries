@@ -72,6 +72,7 @@
       <column name="surface_area" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
       <column name="parent_planet_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="axial_tilt" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="average_temperature" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="index_planets_on_parent_planet_id" unique="false" columns="parent_planet_id"/>
     </table>
@@ -83,17 +84,6 @@
       <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="galaxy_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="regions" schema="" catalog="StellarFoundries_development" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="average_temperature" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="temperature_variance" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="maximum_latitude" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="minimum_latitude" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
-      <column name="planet_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="schema_migrations" schema="" catalog="StellarFoundries_development" type="TABLE">

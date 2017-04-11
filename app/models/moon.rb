@@ -1,4 +1,6 @@
 class Moon < ActiveRecord::Base
+  # TODO Need to remove Moons table and change moons from an ActiveRecord base to something else! (And remove moons from the schema)
+
   belongs_to :planet
   belongs_to :planet_type
   default_scope -> { order(average_orbit: :asc) }
@@ -6,7 +8,8 @@ class Moon < ActiveRecord::Base
   def self.calculate_moon_info(system, planet, orbit)
     moon = Planet.new(name: planet.name + '' + orbit.to_s,
                       parent_planet_id: planet.id,
-                      average_orbit: orbit)
+                      average_orbit: orbit,
+                      average_temperature: planet.average_temperature)
 
     radius = 0
     # mass = 0
@@ -87,5 +90,9 @@ class Moon < ActiveRecord::Base
     moon.surface_area = surface_area
 
     moon.save
+
+    # Generate ores
+    puts "Generating Ores!" if Rails.env.development?
+    Ore.generate_ore(moon)
   end
 end

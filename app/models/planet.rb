@@ -5,8 +5,6 @@ class Planet < ActiveRecord::Base
            foreign_key: "parent_planet_id",
            primary_key: "id",
            dependent: :destroy
-  has_many :regions,
-           dependent: :destroy
   has_many :ores,
            dependent: :destroy
   belongs_to :parent_planet, class_name: "Planet",
@@ -227,7 +225,8 @@ class Planet < ActiveRecord::Base
                               density: density,
                               planet_type_id: planet_type,
                               surface_area: surface_area,
-                              axial_tilt: obliquity)
+                              axial_tilt: obliquity,
+                              average_temperature: planetary_equilibrium_temperature)
 
           planet.save
 

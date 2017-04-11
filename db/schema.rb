@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329182350) do
+ActiveRecord::Schema.define(version: 20170411191922) do
 
   create_table "galaxies", force: :cascade do |t|
     t.integer  "turn_number",    limit: 4
@@ -59,19 +59,20 @@ ActiveRecord::Schema.define(version: 20170329182350) do
   end
 
   create_table "planets", force: :cascade do |t|
-    t.integer  "system_id",        limit: 4
-    t.string   "name",             limit: 255
-    t.float    "average_orbit",    limit: 24
-    t.float    "eccentricity",     limit: 24
-    t.float    "mass",             limit: 24
-    t.float    "radius",           limit: 24
-    t.float    "density",          limit: 24
-    t.integer  "planet_type_id",   limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.float    "surface_area",     limit: 24
-    t.integer  "parent_planet_id", limit: 4
-    t.integer  "axial_tilt",       limit: 4
+    t.integer  "system_id",           limit: 4
+    t.string   "name",                limit: 255
+    t.float    "average_orbit",       limit: 24
+    t.float    "eccentricity",        limit: 24
+    t.float    "mass",                limit: 24
+    t.float    "radius",              limit: 24
+    t.float    "density",             limit: 24
+    t.integer  "planet_type_id",      limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.float    "surface_area",        limit: 24
+    t.integer  "parent_planet_id",    limit: 4
+    t.integer  "axial_tilt",          limit: 4
+    t.integer  "average_temperature", limit: 4
   end
 
   add_index "planets", ["parent_planet_id"], name: "index_planets_on_parent_planet_id", using: :btree
@@ -83,16 +84,6 @@ ActiveRecord::Schema.define(version: 20170329182350) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "galaxy_id",  limit: 4
-  end
-
-  create_table "regions", force: :cascade do |t|
-    t.integer  "average_temperature",  limit: 4
-    t.integer  "temperature_variance", limit: 4
-    t.integer  "maximum_latitude",     limit: 4
-    t.integer  "minimum_latitude",     limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "planet_id",            limit: 4
   end
 
   create_table "sectors", force: :cascade do |t|
