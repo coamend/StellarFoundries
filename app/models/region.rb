@@ -2,7 +2,7 @@ class Region < ActiveRecord::Base
   belongs_to :planet
 
   def self.generate_regions(planet, system)
-    distance = planet.average_orbit * 107.5176 # converting from au to solar diameters
+    distance = Converter.convert_distance(planet.average_orbit, :au, :solar_diameter) # converting from au to solar diameters
     planetary_equilibrium_temperature = system.get_total_star_energy(distance) # in solar surface temperatures ~5780 K
 
     # Tropic of Cancer 0 - Tilt degrees north
