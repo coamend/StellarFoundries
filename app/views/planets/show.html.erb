@@ -47,6 +47,11 @@
   <%= @planet.planet_type.name %>
 </p>
 
+<p>
+  <strong>Planetary Equilibrium Temperature:</strong>
+  <%= @planet.average_temperature %>
+</p>
+
 <% if @planet.moons %>
     <p>
       <strong><%= pluralize(@planet.moons.count, 'Moon') %>:</strong>

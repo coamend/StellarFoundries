@@ -213,8 +213,13 @@ class Planet < ActiveRecord::Base
             obliquity = Random.rand(91..180)
           end
 
-          distance = Converter.convert_distance(orbit, :au, :solar_diameter) # converting from au to solar diameters
-          planetary_equilibrium_temperature = system.get_total_star_energy(distance) # in solar surface temperatures ~5780 K
+          planetary_equilibrium_temperature = System.get_total_star_energy(system, orbit).to_i
+
+=begin
+          if planetary_equilibrium_temperature.to_i < 120
+            planetary_equilibrium_temperature = 120
+          end
+=end
 
           planet = Planet.new(name: system.name + ' ' + orbit.round(2).to_s,
                               system_id: system.id,

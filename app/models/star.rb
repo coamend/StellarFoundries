@@ -88,7 +88,15 @@ class Star < ActiveRecord::Base
     end
   end
 
-  def self.get_star_energy(distance)
-    surface_temperature * Math.sqrt((diameter / 2) / (2 * distance))
+  def self.get_star_energy(star, distance)
+    temp = Converter.convert(:temperature, star.surface_temperature, :solar_temperatures, :kelvin)
+    radius = Converter.convert(:distance, star.diameter, :solar_diameters, :km) / 2.0
+    orbital_distance = Converter.convert(:distance, distance, :au, :km)
+    energy = temp * Math.sqrt(radius / (2.0 * orbital_distance))
+
+    puts "Surface Temperature: " + temp.to_s + "K" if Rails.env.development?
+    puts "Size/Distance Factor: ("+ radius.to_s + " / 2 * " + orbital_distance.to_s + ") " + (radius / (2.0 * orbital_distance)).to_s if Rails.env.development?
+    puts "Star Energy: " + energy.to_s if Rails.env.development?
+    energy
   end
 end

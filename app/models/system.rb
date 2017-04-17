@@ -315,12 +315,14 @@ class System < ActiveRecord::Base
     Planet.generate_planets(system, mass)
   end
 
-  def self.get_total_star_energy(distance)
-    energy = self.primary_star.get_star_energy(distance)
+  def self.get_total_star_energy(system, distance)
+    energy = Star.get_star_energy(system.primary_star, distance)
 
-    unless self.secondary_star.nil?
-      energy += self.secondary_star.get_star_energy(distance)
+    unless system.secondary_star.nil?
+      energy += Star.get_star_energy(system.secondary_star, distance)
     end
+
+    puts "Total Star Energy: " + energy.to_s if Rails.env.development?
 
     energy
   end

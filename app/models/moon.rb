@@ -88,6 +88,7 @@ class Moon < ActiveRecord::Base
     moon.eccentricity = eccentricity
     moon.planet_type_id = planet_type
     moon.surface_area = surface_area
+    moon.average_temperature = planet.average_temperature
 
     moon.save
 
